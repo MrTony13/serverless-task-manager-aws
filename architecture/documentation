@@ -1,0 +1,24 @@
+# Serverless Task Manager on AWS
+
+Built by Anthony Atuegwu  
+Email: mrtony13@gmail.com
+
+## AWS Services Used
+- Amazon S3 (Frontend upload)
+- AWS Amplify (Hosting)
+- Amazon Cognito (Auth)
+- Amazon API Gateway
+- AWS Lambda
+- Amazon DynamoDB
+
+## What This Project Does
+- Users log in securely
+- Create, view, update, delete tasks
+- Data stored in DynamoDB
+- Fully serverless
+
+## Architecture
+![Diagram](architecture/architecture-diagram.png)
+
+## Screenshots
+See screenshots folder for proof of deployment and execution.
