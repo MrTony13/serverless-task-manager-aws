@@ -1,0 +1,16 @@
+This folder contains the AWS Lambda function responsible for
+handling CRUD operations for tasks.
+
+Technologies:
+- AWS Lambda (Node.js)
+- Amazon DynamoDB
+- Amazon API Gateway
+
+The Lambda supports:
+- GET    → fetch all tasks
+- POST   → create task
+- PUT    → update task
+- DELETE → delete task
+
+Environment Variables:
+- TABLE_NAME = TASKS
