@@ -1,0 +1,19 @@
+Table Configuration
+Setting	Value
+Table Name	TASKS
+Partition Key	taskid (String)
+Billing Mode	On-demand (Pay-per-request)
+Encryption	Enabled (AWS managed keys)
+Region	us-east-1
+
+
+
+ Table Schema
+
+Each item stored in the TASKS table has the following attributes:
+
+Attribute	Type	Description
+taskid	String	Unique task identifier (UUID)
+title	String	Task title
+status	String	Task state (created / updated)
+createdAt	String	ISO timestamp of creation
