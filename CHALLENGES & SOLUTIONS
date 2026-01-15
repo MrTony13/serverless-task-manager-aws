@@ -1,0 +1,33 @@
+Challenges & Solutions
+
+1. Authentication Errors (403 Forbidden)
+Challenge: API requests failed after login.
+Solution: Used Cognito Implicit Grant Flow and passed the Access Token (not ID token) in the Authorization header when calling API Gateway.
+
+2. API Gateway Not Triggering Lambda
+Challenge: Requests reached API Gateway but Lambda was not invoked.
+Solution: Configured Lambda proxy integration correctly, enabled CORS, and redeployed the API after every change.
+
+3. DynamoDB Data Not Saving
+Challenge: Lambda returned success but no items appeared in DynamoDB.
+Solution: Fixed a partition key mismatch (taskid vs taskId) so Lambda attributes matched the DynamoDB schema exactly.
+
+4. Lambda Permission Denied (AccessDeniedException)
+Challenge: Lambda could not read or write to DynamoDB.
+Solution: Attached an IAM role with DynamoDB permissions (PutItem, Scan, UpdateItem, DeleteItem) to the Lambda execution role.
+
+5. Lambda Runtime Error (Missing uuid Package)
+Challenge: Lambda failed because the uuid package was not installed.
+Solution: Replaced the dependency with Node.js built-in crypto.randomUUID() to avoid external packages.
+
+6. Frontend Showing No Data
+Challenge: React app loaded but displayed no tasks.
+Solution: Corrected the API endpoint, verified JSON responses, and ensured the frontend state matched the backend response format.
+
+7. Understanding Service Integration
+Challenge: Expected DynamoDB to appear directly inside Lambda configuration.
+Solution: Verified integration using CloudWatch logs and DynamoDB table items instead of the Lambda UI.
+
+8. AWS Free Tier Cost Concerns
+Challenge: Risk of unexpected AWS charges.
+Solution: Used DynamoDB on-demand billing, minimized resources, documented results quickly, and planned full teardown after completion.
