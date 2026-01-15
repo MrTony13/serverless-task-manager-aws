@@ -1,0 +1,3 @@
+User → Cognito User Pool → JWT Token
+JWT Token → API Gateway Authorizer
+API Gateway → AWS Lambda → DynamoDB
