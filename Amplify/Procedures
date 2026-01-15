@@ -1,0 +1,149 @@
+Step 1: Preparing the React Application
+
+I already had a React application that:
+
+Displays a task table
+
+Allows creating and deleting tasks
+
+Communicates with an API Gateway endpoint
+
+Uses Amazon Cognito for authentication
+
+Before deploying, I ensured:
+
+The app builds correctly using npm run build
+
+API URLs were configurable using environment variables
+
+No hardcoded secrets were in the code
+
+Challenge Faced
+
+At first, my app built locally but failed during deployment.
+
+Solution
+
+With guidance, I verified:
+
+The build output directory was build/
+
+All required dependencies were properly installed
+
+The project structure matched what Amplify expects
+
+Step 2: Creating the Amplify Application
+
+I navigated to:
+
+AWS Console → Amplify → Create New App
+
+I selected:
+
+Host web app
+
+Connected my GitHub repository
+
+Chose the main branch
+
+Amplify automatically detected that this was a React application.
+
+Step 3: Configuring the Build & Deployment Pipeline
+
+Amplify generated a CI/CD pipeline automatically.
+
+Behind the scenes:
+
+The React app is built using npm run build
+
+The compiled static files are uploaded to Amazon S3
+
+Amazon CloudFront is provisioned automatically to serve the content globally
+
+This was important because:
+
+S3 provides durable storage for the frontend files
+
+CloudFront improves performance with caching and global edge locations
+
+HTTPS is enabled by default
+
+Challenge Faced
+
+Initially, I did not realize CloudFront was being used.
+
+Solution
+
+I learned that:
+
+Amplify automatically creates and manages CloudFront
+
+No manual CloudFront setup is required
+
+The distribution can be seen in the AWS CloudFront console
+
+Step 4: Setting Environment Variables
+
+To connect the frontend to backend services, I configured environment variables in Amplify:
+
+REACT_APP_API_URL
+
+REACT_APP_REGION
+
+REACT_APP_COGNITO_USER_POOL_ID
+
+REACT_APP_COGNITO_CLIENT_ID
+
+Challenge Faced
+
+The frontend could not read the environment variables.
+
+Solution
+
+I learned that:
+
+All frontend environment variables must start with REACT_APP_
+
+The app must be redeployed after updating variables
+
+Step 5: Connecting to Backend Services
+
+The frontend communicates with:
+
+API Gateway for REST endpoints
+
+AWS Lambda for business logic
+
+Amazon DynamoDB for data storage
+
+Amazon Cognito for authentication
+
+Authorization tokens are attached to API requests so only authenticated users can access data.
+
+Step 6: Deployment and Testing
+
+After pushing my code to GitHub:
+
+Amplify automatically triggered a new build
+
+The app was deployed successfully
+
+A public HTTPS URL was generated
+
+I tested:
+
+Creating tasks
+
+Viewing tasks from DynamoDB
+
+Deleting tasks
+
+Loading the app from different devices
+
+Challenges Faced and How They Were Solved
+Challenge	How It Was Solved
+Build failures	Fixed build directory and dependencies
+API returned 403 errors	Corrected Cognito authorizer and tokens
+Environment variables not working	Used REACT_APP_ prefix
+DynamoDB not updating	Fixed Lambda IAM permissions
+Confusion about CloudFront
