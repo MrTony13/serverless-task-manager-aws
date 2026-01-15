@@ -1,0 +1,20 @@
+AWS Lambda Setup Steps
+1. Create Lambda Function
+
+Open AWS Console
+
+Navigate to Lambda
+
+Click Create function
+
+Select Author from scratch
+
+Configuration:
+
+Function name: task-handler
+
+Runtime: Node.js 18.x
+
+Architecture: x86_64
+
+Execution role: Create new role with basic permissions
