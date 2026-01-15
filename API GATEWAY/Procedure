@@ -1,0 +1,138 @@
+Step 1: Creating the REST API
+
+I navigated to:
+
+AWS Console → API Gateway → Create API
+
+I selected:
+
+REST API
+
+Build
+
+API name: ServerlessTasksAPI
+
+Endpoint type: Regional
+
+This allows the API to be scalable and integrate easily with CloudFront and Amplify.
+
+Step 2: Creating Resources and Methods
+
+I created a resource:
+
+Resource name: tasks
+
+Resource path: /tasks
+
+Then I added the following HTTP methods:
+
+Method	Purpose
+GET	Retrieve all tasks
+POST	Create a new task
+PUT	Update an existing task
+DELETE	Delete a task
+
+Each method was configured to integrate with AWS Lambda.
+
+Step 3: Connecting API Gateway to Lambda
+
+For each method:
+
+Integration type: Lambda Function
+
+Lambda region: us-east-1
+
+Lambda function name: TasksLambda
+
+I granted API Gateway permission to invoke the Lambda function.
+
+Step 4: Enabling CORS
+
+To allow the frontend hosted on Amplify to access the API, I enabled CORS:
+
+Allowed origins: *
+
+Allowed headers: Authorization, Content-Type
+
+Allowed methods: GET, POST, PUT, DELETE, OPTIONS
+
+This step was critical to prevent browser CORS errors.
+
+Step 5: Securing the API with Amazon Cognito
+
+To secure the API, I configured Cognito User Pool Authorizer:
+
+Authorizer type: Cognito
+
+User pool: My existing Cognito User Pool
+
+Token source: Authorization
+
+I then attached the authorizer to all methods (except OPTIONS).
+
+Challenge Faced
+
+Initially, I received 403 Forbidden errors.
+
+Solution
+
+I discovered:
+
+The Authorization header must be in the format:
+Bearer <access_token>
+
+The correct token to use is the Access Token, not the ID Token
+
+The authorizer must be attached before deploying the API
+
+Step 6: Deploying the API
+
+After configuration, I deployed the API:
+
+Actions → Deploy API
+
+Stage name: prod
+
+This generated a public endpoint:
+
+https://257xw6mixb.execute-api.us-east-1.amazonaws.com/prod
+
+
+All frontend requests now route through this endpoint.
+
+Step 7: Testing the API
+
+I tested the API using:
+
+API Gateway Test feature
+
+Browser frontend hosted on Amplify
+
+Verified data was created in DynamoDB
+
+Successful tests confirmed:
+
+Authorization was working
+
+Lambda was executing
+
+DynamoDB data was persisted
+
+Challenges Faced and How They Were Solved
+Challenge	Resolution
+403 Forbidden errors	Used Access Token instead of ID Token
+CORS errors	Enabled CORS on all resources
+API not reflecting changes	Redeployed API
+Lambda not invoked	Fixed IAM permissions
+Token not passed	Corrected Authorization header
+Final API Gateway Architecture Role
+
+Acts as the secure entry point
+
+Validates user identity using Cognito
+
+Routes requests to Lambda
+
+Provides monitoring via CloudWatch
+
+Supports scalable backend architecture
