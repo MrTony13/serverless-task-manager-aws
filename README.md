@@ -11,6 +11,32 @@ The goal of this project is to show how modern cloud-native applications handle 
 * **Amazon API Gateway** – Exposes Lambda as a REST API
 ## Amazon Cognito – Setup Procedure
 
+serverless-task-manager/
+│
+├── README.md
+│
+├── architecture/
+│   └── architecture-overview.md
+│
+├── frontend/
+│   └── App.js
+│
+├── lambda/
+│   ├── createTask.js
+│   ├── getTasks.js
+│   ├── updateTask.js
+│   └── deleteTask.js
+│
+├── dynamodb/
+│   └── table-design.md
+│
+├── cognito/
+│   └── cognito-setup.md
+│
+├── amplify/
+│   └── amplify-setup.md
+│
+└── challenges-and-solutions.md
 
 Anthony Atuegwu
 
